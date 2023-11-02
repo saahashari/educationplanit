@@ -1,7 +1,7 @@
 # educationhackathon
 
 <h2>1. Project Title</h2> <br>
-Project Description & Background <br>
+<h2>Project Description & Background</h2> <br>
 Table of Contents <br>
 Requirements (required) <br>
 Recommended modules (optional) <br>
