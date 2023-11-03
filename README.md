@@ -1,6 +1,7 @@
 # educationhackathon
 
 <h2>1. Project Title</h2> <br>
+Education Consultant
 <h2>Project Description & Background</h2> <br>
 <h2>Table of Contents</h2> <br>
 <h2>Requirements (required) </h2><br>
