@@ -22,8 +22,21 @@ palm.configure(api_key = API_KEY)</code></div>
 <br>
 <h5><u>SNIPPET 3</u><h5>
 <div style="border: 2px solid#000; padding 10px;"><code>def findJD(jobroles):<br>
-JD = []<br>for i in jobroles:<br> prompt = f"Can you briefly explain in three lines what {i} is to a middle schooler? Please use an example if it is hard to explain"<br>completion=palm.generate_text(<br>model=model_id,<br>prompt=prompt,<br>temperature=0.99,<br> max_output_tokens=800,<br>)<br>result = completion.result<br>JD.append(result)<br>return JD<br>
-</code></div><br>
+JD = []<br>
+for i in jobroles:<br>
+ prompt = f"Can you briefly explain in three lines what {i} is to a middle schooler? Please use an example if it is hard to explain"<br>
+ completion=palm.generate_text(<br>
+ model=model_id,<br>
+ prompt=prompt,<br>
+ temperature=0.99,<br> 
+ max_output_tokens=800,<br>
+ )<br>
+ result = completion.result
+ <br>
+ JD.append(result)
+ <br>
+ return JD
+ <br></code></div><br>
 The above function takes a list of <i>jobroles</i> as parameters. For each job role the funtion generates a prompt, a three line string that asks ti explain what a jobrole is. The set parameters of <i>temperature</i> and <i>max_output_tokens</i> limits the randomness of the output and the length generated text. The reult obtained is stored in </i><b>result</b></i> and is appended to a list <b>JD</b><br>
 <br>
 <h5><u>SNIPPET 4</u></h5>
