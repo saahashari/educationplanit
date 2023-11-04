@@ -32,9 +32,7 @@ for i in jobroles:<br>
  max_output_tokens=800,<br>
  )<br>
  result = completion.result
- <br>
  JD.append(result)
- <br>
  return JD
  <br></code></div><br>
 The above function takes a list of <i>jobroles</i> as parameters. For each job role the funtion generates a prompt, a three line string that asks ti explain what a jobrole is. The set parameters of <i>temperature</i> and <i>max_output_tokens</i> limits the randomness of the output and the length generated text. The reult obtained is stored in </i><b>result</b></i> and is appended to a list <b>JD</b><br>
