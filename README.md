@@ -44,7 +44,6 @@ The above function takes a list of <i>jobroles</i> as parameters. For each job r
 <br>for i in jobroles:
 <br>prompt = f'Can you briefly explain what courses do I need to take in college to become {i}? Just list out top 5 courses names as a starred list only. Do not add any title'
 <br>completion=palm.generate_text(
-<br>
 model=model_id,
 <br>prompt=prompt,
 <br>temperature=0.99,
@@ -59,7 +58,27 @@ model=model_id,
 The above code generates a list of courses for the prescribed job role. The <i>findcourses</i> function recieves jobroles as parameter and iterates over each each item in the jobrole list. <i>palm_generate_text</i> generates using the Palm API and the values are passed to the identifiers. The result is then retrieved from the text generating model and the '*' is replaced using the <i>result.replace</i> command. The modified result is then appended to the courses list and is passed to the caller function through the <i>return(courses)</i>.<br>
 <br>
 <h5><u>SNIPPET 5</u></h5><br>
-<div style="border: 2px solid#000; padding 10px"><code># Find top 3 schools for the particular job role and also suggest which degree programs would help<br># every i element in colleges list correspond to the i job role. Output Format - College | Degree\n In a single i element, use \n to separate college | degree combinations for every i role.<br>def findcolleges(jobroles):<br>colleges = []<br>for i in jobroles:<br>prompt = f'Output format should be College|Degree. Do not add any title like College|Degree. No numbered list too. Can you give me the top 3 schools for the {i} role? Also, give me which undergrad degree program to go for? Just list these out as a starred list only.'<br> completion=palm.generate_text(<br>model=model_id,<br>prompt=prompt,<br>temperature=0.99,<br>max_output_tokens=800,<br>)<br>result = completion.result<br>result_mod = result.replace('*', '')<br>result_mod = result_mod.replace('[', '')<br>result_mod = result_mod.replace(']', '')<br>result_mod = result_mod.replace('College|Degree', '')<br>result_mod = result_mod.replace('College | Degree', '') #resorted to this hard-coding after trying numerous times to clean strings efficiently<br>colleges.append(result_mod)<br>colleges = [x.strip(' ') for x in colleges]<br>return colleges</code></div>
+<div style="border: 2px solid#000; padding 10px"><code># Find top 3 schools for the particular job role and also suggest which degree programs would help
+<br># every i element in colleges list correspond to the i job role. Output Format - College | Degree\n In a single i element, use \n to separate college | degree combinations for every i role.
+<br>def findcolleges(jobroles):
+<br>colleges = []
+<br>for i in jobroles:
+<br>prompt = f'Output format should be College|Degree. Do not add any title like College|Degree. No numbered list too. Can you give me the top 3 schools for the {i} role? Also, give me which undergrad degree program to go for? Just list these out as a starred list only.'
+<br> completion=palm.generate_text(
+<br>model=model_id,
+<br>prompt=prompt,
+<br>temperature=0.99,
+<br>max_output_tokens=800,
+<br>)
+<br>result = completion.result
+<br>result_mod = result.replace('*', '')
+<br>result_mod = result_mod.replace('[', '')
+<br>result_mod = result_mod.replace(']', '')
+<br>result_mod = result_mod.replace('College|Degree', '')
+<br>result_mod = result_mod.replace('College | Degree', '') #resorted to this hard-coding after trying numerous times to clean strings efficiently
+<br>colleges.append(result_mod)
+<br>colleges = [x.strip(' ') for x in colleges]
+<br>return colleges</code></div>
 <br>
 This function recieves the <i>jobrole</i> parameter and associates it with the top 3 schools and courses that pre4fera ly lands you the jobrole. The recieved parameter is itrated and then dtored in the predefined empty array <i>collages</i>[]. The prompt is then send to the AI model which then returns and stores in the identifier. As in the previous code snippets, the <i>temperature</i> and <i>max
 output_tokens</i> limits the generaterd output. The result is then passed using the <i>return(collages)</i> function. <br>
