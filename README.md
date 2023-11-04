@@ -38,7 +38,24 @@ for i in jobroles:<br>
 The above function takes a list of <i>jobroles</i> as parameters. For each job role the funtion generates a prompt, a three line string that asks ti explain what a jobrole is. The set parameters of <i>temperature</i> and <i>max_output_tokens</i> limits the randomness of the output and the length generated text. The reult obtained is stored in </i><b>result</b></i> and is appended to a list <b>JD</b><br>
 <br>
 <h5><u>SNIPPET 4</u></h5>
-<div style="border: 2px solid#000; padding 10px;"><code># Suggest top 5 courses for the particular job role<br>def findcourses(jobroles):<br> courses = []<br>for i in jobroles:<br>prompt = f'Can you briefly explain what courses do I need to take in college to become {i}? Just list out top 5 courses names as a starred list only. Do not add any title'<br>completion=palm.generate_text(<br>model=model_id,<br>prompt=prompt,<br>temperature=0.99,<br>max_output_tokens=800,<br>)<br>result = completion.result<br>result_mod = result.replace('*', '')<br>result_mod = result_mod.replace(f'Top 5 College Courses for {i}s', '')<br>courses.append(result_mod)<br>courses = [x.strip(' ') for x in courses]<br>return courses</code></div><br>
+<div style="border: 2px solid#000; padding 10px;"><code># Suggest top 5 courses for the particular job role
+<br>def findcourses(jobroles):
+<br> courses = []
+<br>for i in jobroles:
+<br>prompt = f'Can you briefly explain what courses do I need to take in college to become {i}? Just list out top 5 courses names as a starred list only. Do not add any title'
+<br>completion=palm.generate_text(
+<br>
+model=model_id,
+<br>prompt=prompt,
+<br>temperature=0.99,
+<br>max_output_tokens=800,
+<br>)
+<br>result = completion.result
+<br>result_mod = result.replace('*', '')
+<br>result_mod = result_mod.replace(f'Top 5 College Courses for {i}s', '')
+<br>courses.append(result_mod)
+<br>courses = [x.strip(' ') for x in courses]
+<br>return courses</code></div><br>
 The above code generates a list of courses for the prescribed job role. The <i>findcourses</i> function recieves jobroles as parameter and iterates over each each item in the jobrole list. <i>palm_generate_text</i> generates using the Palm API and the values are passed to the identifiers. The result is then retrieved from the text generating model and the '*' is replaced using the <i>result.replace</i> command. The modified result is then appended to the courses list and is passed to the caller function through the <i>return(courses)</i>.<br>
 <br>
 <h5><u>SNIPPET 5</u></h5><br>
