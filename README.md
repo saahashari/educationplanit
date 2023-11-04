@@ -84,12 +84,46 @@ This function recieves the <i>jobrole</i> parameter and associates it with the t
 output_tokens</i> limits the generaterd output. The result is then passed using the <i>return(collages)</i> function. <br>
 <br>
 <h5><u>SNIPPET 6</h5></u>
-<div style="border: 2px solid#000; padding 10px"><code>def findsalaryrange(jobroles):<br>salaryranges = []<br>for i in jobroles:<br>prompt = f'Output format should be $Salary Range, and numbers should not be shortened. Do not add any title, including the job role. Can you give me a single base salary range (median) for the {i} role? Just list these out as a starred list only.'<br>completion=palm.generate_text(<br>model=model_id,<br>prompt=prompt,<br>temperature=0.99,<br>max_output_tokens=800,<br>)<br>result = completion.result<br>result_mod = result.replace('*', '')<br>result_mod = result_mod.replace('\\', '')<br>salaryranges.append(result_mod)<br>salaryranges = [x.strip(' ') for x in salaryranges]<br>return salaryranges</code></div>
+<div style="border: 2px solid#000; padding 10px"><code>def findsalaryrange(jobroles):
+<br>salaryranges = []
+<br>for i in jobroles:
+<br>prompt = f'Output format should be $Salary Range, and numbers should not be shortened. Do not add any title, including the job role. Can you give me a single base salary range (median) for the {i} role? Just list these out as a starred list only.'
+<br>completion=palm.generate_text(
+<br>model=model_id,
+<br>prompt=prompt,
+<br>temperature=0.99,
+<br>max_output_tokens=800,
+<br>)
+<br>result = completion.result
+<br>result_mod = result.replace('*', '')
+<br>result_mod = result_mod.replace('\\', '')
+<br>salaryranges.append(result_mod)
+<br>salaryranges = [x.strip(' ') for x in salaryranges]
+<br>return salaryranges</code></div>
 <br>
 This function recieves the jobroles as the parameter and is used to associate expected salary range for each jobrole mentioned. An empty list <i>salary_range</i> is created and is iterated in order to attain the required specification. The function to invoke the AI model is used and the returned values are stored in the identifier. The obtained result in the identifiers is theen cleaned using the <i>replace</i>functions and finally appended to the list. The entire function finally returns the <i>salaryrange</i>anytime being invoked.<br>
 <br>
 <h5><u>SNIPPET 7</u><h5>
-<div style="border: 2px solid#000; padding 10px"><code>def findjobroles(what_karthik_gives_me):<br>prompt = what_karthik_gives_me + ''' Output format should be a starred list. Find me the perfect job role. Just list the top 5 job roles alone, and nothing else.'''<br>completion=palm.generate_text(<br>model=model_id,<br>prompt=prompt,<br>temperature=0.99,<br>max_output_tokens=800,<br>)<br>result = completion.result<br>result_mod = result.replace('*', '')<br>jobroles = result_mod.split('\n')<br>jobroles = [x.strip(' ') for x in jobroles]<br>JDlist = findJD(jobroles)<br>courselist = findcourses(jobroles)<br>collegeslist = findcolleges(jobroles) # every i element in colleges list correspond to the i job role. Output Format - College | Degree\n In a single i element, use \n to separate college | degree combinations for every i role. Other lists except jobroles follow the same format.<br>salarylist = findsalaryrange(jobroles) # every i element corresponds to i job role, pretty straightforward<br>print(jobroles)<br>print(JDlist)<br>print(courselist)<br>print(collegeslist)<br>print(salarylist)</code></div>
+<div style="border: 2px solid#000; padding 10px"><code>def findjobroles(what_karthik_gives_me):
+<br>prompt = what_karthik_gives_me + ''' Output format should be a starred list. Find me the perfect job role. Just list the top 5 job roles alone, and nothing else.'''
+<br>completion=palm.generate_text(<br>model=model_id,
+<br>prompt=prompt,
+<br>temperature=0.99,
+<br>max_output_tokens=800,
+<br>)
+<br>result = completion.result
+<br>result_mod = result.replace('*', '')
+<br>jobroles = result_mod.split('\n')
+<br>jobroles = [x.strip(' ') for x in jobroles]
+<br>JDlist = findJD(jobroles)
+<br>courselist = findcourses(jobroles)
+<br>collegeslist = findcolleges(jobroles) # every i element in colleges list correspond to the i job role. Output Format - College | Degree\n In a single i element, use \n to separate college | degree combinations for every i role. Other lists except jobroles follow the same format.
+<br>salarylist = findsalaryrange(jobroles) # every i element corresponds to i job role, pretty straightforward
+<br>print(jobroles)
+<br>print(JDlist)
+<br>print(courselist)
+<br>print(collegeslist)
+<br>print(salarylist)</code></div>
 <br>
 Here, the function recieves the dynamic input from the user. The prompt is the passed to the generative AI and the resulting being stored in the identifiers. After cleaning the output the result is split into a list of jobs. Each obtained jobrole is used as parameters to invoke the functions <i>findJD</i>, <i>findcourses</i>, <i>fincollages</i> and <i>findsalaryrange</i>. The values returned from these functions are stored and printed respectively in seperate lists or arrays, namely: <i>JDlist</i>, <i>courselist</i>, <i>collagelist</i> and <i>salarylist<i>.
 
