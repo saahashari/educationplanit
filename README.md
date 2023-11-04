@@ -129,6 +129,9 @@ Here, the function recieves the dynamic input from the user. The prompt is the p
 <br>
 <br>
 <h5><u>SNIPPET 8(USER INTERFACE)</h5></u>
-<div style="border: 2px solid#000; padding 10px"><code><!DOCTYPE html>
+<img src="/educationhackathon/newU1.jpeg">
+<img src="/educationhackathon/UI1.jpeg">
+<br>The user interface developed has been given as two images in the repository. In the HTML interface a link to bootstrap's CSS is included. The <i>intergrity</i> and <i>crossorigin</i> makes sure of the authenticity of the file. A row with a centered text along with the header is being described provided with a form which enables the contents to be typed in by the user. A styled button in order to make it more appealing has been included with the <i>button_type</i>. The <i>AJAX</i> request runs the query without reloading the page associated with the Javascript Bundle imported. The data is sent using the <i>data: $(this).serialise</i> defined by the type <i>POST</i>. If there occurs an error during the retrieval of data it returns error message using the same div provided. 
+
 
 
