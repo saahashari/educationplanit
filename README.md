@@ -17,8 +17,9 @@ Our project is in its developmental phase and has not reached its final form. We
 <br>
 <h5><u>SNIPPET 2</u></h5>
 <div style="border: 2px solid#000; padding: 10px;"><code>import google.generativeai as palm<br>API_KEY = 'AIzaSyDKbnLMFZ3I1H2iXcBMsYpe31IIu4BM4aM'<br>
-palm.configure(api_key = API_KEY)</code></div>
-<br>The installed package is imported using the import command. The API key is used to authenticate the program and also to use the training model that we require.<br>
+palm.configure(api_key = API_KEY)<br>
+from flask import Flask, jsonify, request, render_template</code></div>
+<br>The installed package is imported using the import command. The API key is used to authenticate the program and also to use the training model that we require. We use the flask as it is the main class in the flask web framework. It is used to create an instance of the web application.<br>
 <br>
 <h5><u>SNIPPET 3</u><h5>
 <div style="border: 2px solid#000; padding 10px;"><code>def findJD(jobroles):<br>
@@ -131,7 +132,28 @@ Here, the function recieves the dynamic input from the user. The prompt is the p
 <h5><u>SNIPPET 8(USER INTERFACE)</h5></u>
 <img src="/educationhackathon/newU1.jpeg">
 <img src="/educationhackathon/UI1.jpeg">
-<br>The user interface developed has been given as two images in the repository. In the HTML interface a link to bootstrap's CSS is included. The <i>intergrity</i> and <i>crossorigin</i> makes sure of the authenticity of the file. A row with a centered text along with the header is being described provided with a form which enables the contents to be typed in by the user. A styled button in order to make it more appealing has been included with the <i>button_type</i>. The <i>AJAX</i> request runs the query without reloading the page associated with the Javascript Bundle imported. The data is sent using the <i>data: $(this).serialise</i> defined by the type <i>POST</i>. If there occurs an error during the retrieval of data it returns error message using the same div provided. 
+<br>The user interface developed has been given as two images in the repository. In the HTML interface a link to bootstrap's CSS is included. The <i>intergrity</i> and <i>crossorigin</i> makes sure of the authenticity of the file. A row with a centered text along with the header is being described provided with a form which enables the contents to be typed in by the user. A styled button in order to make it more appealing has been included with the <i>button_type</i>. The <i>AJAX</i> request runs the query without reloading the page associated with the Javascript Bundle imported. The data is sent using the <i>data: $(this).serialise</i> defined by the type <i>POST</i>. If there occurs an error during the retrieval of data it returns error message using the same div provided. <br>
+This index template is referenced in the main. 
+<br>
+<div style="border: 2px solid#000; padding 10px"><code>@app.route('/')
+<br>def index():
+<br>def index():
+<br>@app.route('/findjobroles', methods=['POST'])
+<br>def get_job_roles():
+<br>interests = request.form['interests']
+<br> job_roles_data = findjobroles(interests)
+<br>output = ""
+<br>for key, values in job_roles_data.items():
+<br>output += key + "; "
+<br>for value in values:
+<br>output += value + " "
+<br>output += " "
+<br>return output
+<br>if __name__ == '__main__':
+<br>app.run(debug=True)</code></div>
+
+
+
 
 
 
