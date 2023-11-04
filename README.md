@@ -129,6 +129,6 @@ Here, the function recieves the dynamic input from the user. The prompt is the p
 <br>
 <br>
 <h5><u>SNIPPET 8(USER INTERFACE)</h5></u>
-<div style="border: 2px solid#000; padding 10px"><code><!--<!DOCTYPE html>
+<div style="border: 2px solid#000; padding 10px"><code><!DOCTYPE html>
 
 
