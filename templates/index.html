@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Role Finder</title>
+</head>
+<body>
+    <h1>Find Your Job Role</h1>
+    <form id="interest-form">
+        <input type="text" name="interests" placeholder="Enter your interests" required>
+        <button type="submit">Find Job Roles</button>
+    </form>
+
+    <!-- The response will be displayed here -->
+    <div id="response"></div>
+
+    <!-- Include jQuery for AJAX request -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('#interest-form').on('submit', function(e){
+            e.preventDefault();
+            $.ajax({
+                url: '/findjobroles',
+                type: 'post',
+                data: $(this).serialize(),
+                success: function(response){
+                    // Display the response in the #response div or handle it as needed
+                    $('#response').html(JSON.stringify(response, null, 2));
+                },
+                error: function(error) {
+                    // Handle errors here
+                    $('#response').html('Error: ' + error.responseText);
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
