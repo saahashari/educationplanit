@@ -65,24 +65,6 @@ def findcolleges(jobroles):
     colleges_string = ', '.join(formatted_colleges)
     colleges.append(colleges_string)
   return colleges
-  """colleges = []
-  for i in jobroles:
-    prompt = f'Output format should be College|Degree. Do not add any title like College|Degree. No numbered list too. Can you give me the top 3 schools for the {i} role? Also, give me which undergrad degree program to go for? Just list these out as a starred list only.'
-    completion=palm.generate_text(
-    model=model_id,
-    prompt=prompt,
-    temperature=0.99,
-    max_output_tokens=800,
-    )
-    result = completion.result
-    result_mod = result.replace('*', '')
-    result_mod = result_mod.replace('[', '')
-    result_mod = result_mod.replace(']', '')
-    result_mod = result_mod.replace('College|Degree', '')
-    result_mod = result_mod.replace('College | Degree', '') #resorted to this hard-coding after trying numerous times to clean strings efficiently
-    colleges.append(result_mod)
-  colleges = [x.strip(' ') for x in colleges]
-  return colleges"""
 
 def findsalaryrange(jobroles):
   salaryranges = []
