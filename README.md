@@ -130,9 +130,6 @@ Here, the function recieves the dynamic input from the user. The prompt is the p
 <br>
 <br>
 <h5><u>SNIPPET 8(USER INTERFACE)</h5></u>
-<img src="/educationhackathon/images/New1.jpeg">
-<img src="/educationhackathon/images/New2.jpeg">
-<img src="/educationhackathon/images/New3.jpeg">
 
 <br>The code for our user interface (UI) has been provided, which contains a Bootstrap CSS framework. Let's break everything down step-by-step. To begin with, we declare the document as an 'HTML' document in the English language. In the Head Section, we use the <i>title</i>, <i>link</i>, and <i>script</i> tags to establish the contents of the UI, such as the title, as well as a reference the included Bootstrap Stylesheet. Also, we use the <i>intergrity</i> and <i>crossorigin</i> tags to ensure the authenticity of the file. In the Body Section, we first use <i>container text-center</i> as a container for our generated content and <i>row text-center</i> to display a heading. Next, we create a form called 'interest-form' that contains an input field for the user to detail their personal and professional interets. This is followed by a submit button coded as <i>button type="submit"</i> with a Bootstrap button of class <i>class="btn btn-primary</i> and the generated response is stored in an empty container <i>div id="response"</i>. We follow this up with a jQuery, which is JavaScript Library, that handles a AJAX Request to generate a table of specifc Job Roles based on the user's response. When handling an AJAX Request in this case, we bind our specific function to a document ready request, <i>$(document).ready(function())</i>, to ensure our DOM is loaded before executing or running. This is followed up by a Form Submission Handler that triggers the ID <i>interest-form</i> upon successful user input submission. Our code then handles an AJAX Request that specifies an endpoint, <i>/findjobroles</i>, for the request to be sent as well as data from the request to be sent to the server and serialized for submission. The <i>success: function(response)</i> is an AJAX Success Callback that defines what happens if the AJAX Request is successfull receieved and executed; it will generate an HTML Table that contains associated values in the Header Rows of <i>Job Role</i>, <i>JD</i>, <i>Courses</i>, <i>Colleges</i>, and <i>Salary</i>, which are all appended to the table. This is then followed by the for loop function <i>for(var i = 0; i < response.jobroles.length; i++)</i>, which essentially works to generate and append text values in each of the specific header rows to the constructed table. This table is then added to the HTML Element with ID <i>#response</i>; it should be noted that the previous responses of the table are emptied before adding the newly generated responses or result. Finally, in the event that an AJAX Request cannot be handled or encounters an error, we created an error callback function that logs the message, "Error Occurred" and displays an error message through the HTML Element with ID <i>#response</i>.<br>
 This index template is referenced in the main. 
@@ -155,7 +152,12 @@ This index template is referenced in the main.
 <br>app.run(debug=True)</code></div>
 <br> The index is referenced and called here. The request form recieves the dynamic input from the user and the <i>job_roles_data </i> is called by passing the input as the parameter. The output is recieved by iterating over the items in <i> job_roles_data </i>. The main code is used to run a standard python flask application. The <i>debug=true</i> enables the flask debugger.
 
-<h3 style="text-align: left;"><i><u>Results and Output</u></i></h3>
+<h3 style="text-align: left;"><i><u>Results and Output</u></i></h3><br>
+The output has been presented in the images provided in the section. As per the interests of the user, the interface provides the course of action that the user can stick to in order to achieve it. From a future point of view, this can be further worked on by training with more availablity of the data. To install the required packages & libraries that we used for our project, you can write the command <b><code>pip install -r requirements.txt</code></b> . <br>
+To run the code use <b><code>python hackathoneducation.py</code></b>
+
+
+
 
 
 
