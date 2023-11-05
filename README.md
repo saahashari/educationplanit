@@ -155,7 +155,12 @@ This index template is referenced in the main.
 <br>app.run(debug=True)</code></div>
 <br> The index is referenced and called here. The request form recieves the dynamic input from the user and the <i>job_roles_data </i> is called by passing the input as the parameter. The output is recieved by iterating over the items in <i> job_roles_data </i>. The main code is used to run a standard python flask application. The <i>debug=true</i> enables the flask debugger.
 
-<h3 style="text-align: left;"><i><u>Results and Output</u></i></h3>
+<h3 style="text-align: left;"><i><u>Results and Output</u></i></h3><br>
+The output has been presented in the images provided in the section. As per the interests of the user, the interface provides the course of action that the user can stick to in order to achieve it. From a future point of view, this can be further worked on by training with more availablity of the data. To install the required packages & libraries that we used for our project, you can write the command <b><code>pip install -r requirements.txt</code></b> . <br>
+To run the code use <b><code>python hackathoneducation.py</code></b>
+
+
+
 
 
 
