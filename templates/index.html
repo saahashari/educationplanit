@@ -9,11 +9,47 @@
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
  crossorigin="anonymous"></script>
- <style>
-    .job-table td {
-        padding-top: 10px; /* This will create space between rows */
-        padding-bottom: 10px; /* This will create space between rows */
-    }
+<style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            flex: 1;
+        }
+        .job-table {
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,.1);
+        }
+        .job-table th, .job-table td {
+            padding: 15px;
+            vertical-align: middle;
+        }
+        .job-table th {
+            background-color: #007bff;
+            color: white;
+        }
+        .form-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,.1);
+        }
+        .btn-primary {
+            width: 100%; /* Make the button as wide as the form control */
+        }
+        .form-control {
+            width: 300px; /* Make the text entry box bigger */
+        }
+        .footer {
+            padding: 20px 0;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+        }
 </style>
 </head>
 <body>
@@ -22,12 +58,20 @@
             <h2>Find Your Job Role</h2>
         </div>
 
-        <!-- <h1>Find Your Job Role</h1> -->
-        <form id="interest-form">
-            <input type="text" name="interests" placeholder="Enter your interests" required>
-            <button type="submit" class="btn btn-primary">Find Job Roles</button>
-        </form>
-    
+        <div class="form-section">
+            <form id="interest-form" class="row g-3 justify-content-center">
+                <div class="col-auto">
+                    <input type="text" class="form-control" name="interests" placeholder="Enter your interests" required>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Find Job Roles</button>
+                </div>
+            </form>
+        </div>
+        <div class="footer">
+            <p>Job Role Finder &copy; 2023</p>
+        </div>
+    </div>
     <!-- The response will be displayed here -->
     <div id="response">
 
@@ -35,16 +79,19 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
     $(document).ready(function(){
-        console.log("Document ready");
         $('#interest-form').on('submit', function(e){
             e.preventDefault();
+            var loadingText = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+            var originalText = '<i class="fas fa-search"></i> Find Job Roles';
+            var button = $(this).find('button');
+            button.html(loadingText);
             $.ajax({
                 url: '/findjobroles',
                 type: 'post',
                 data: $(this).serialize(),
                 success: function(response){
                     // Assuming `response` is a JSON object with job data
-                    console.log("Hello");
+
                     var table = $('<table>').addClass('job-table');
                     var headerRow = $('<tr>');
                     headerRow.append($('<th>').text('Job Role'));
@@ -63,13 +110,12 @@
                         row.append($('<td>').text(response.salary[i]));
                         table.append(row);
                     }
-
-                    console.log(response);
+                    button.html(originalText);
                     $('#response').empty().append(table);
                 },
                 error: function(error) {
                     // Handle errors here
-                    console.log("Error occurred");
+                    button.html(originalText);
                     $('#response').html('Error: ' + error.responseText);
                 }
             });
