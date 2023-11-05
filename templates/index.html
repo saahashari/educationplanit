@@ -15,9 +15,14 @@
             margin: 0;
             display: flex;
             flex-direction: column;
+            background-color: #333;
+            color: white;
         }
         .container {
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .job-table {
             margin-top: 20px;
@@ -29,25 +34,34 @@
         }
         .job-table th {
             background-color: #007bff;
-            color: white;
+            color: black;
         }
         .form-section {
-            background-color: white;
+            background-color: grey;
             padding: 20px;
             border-radius: 8px;
             margin-top: 20px;
+            margin-left: 10px; /* Reduced margin on the left */
+            margin-right: 10px; /* Reduced margin on the right if needed */
             box-shadow: 0 5px 15px rgba(0,0,0,.1);
+            width: auto; /* Adjust width to auto to maximize space */
         }
         .btn-primary {
             width: 100%; /* Make the button as wide as the form control */
         }
         .form-control {
-            width: 300px; /* Make the text entry box bigger */
+            width: 100%; /* Will take full width of the container */
+            padding: 10px;
+            font-size: 16px;
+            /* Set the minimum height if you wish */
+            min-height: 100px; /* Adjust this value to your preference */
+            /* If you want to prevent users from resizing the textarea, you can use: */
+            /* resize: none; */
         }
         .footer {
             padding: 20px 0;
             background-color: #007bff;
-            color: white;
+            color: black;
             text-align: center;
         }
 </style>
@@ -60,11 +74,11 @@
 
         <div class="form-section">
             <form id="interest-form" class="row g-3 justify-content-center">
-                <div class="col-auto">
-                    <input type="text" class="form-control" name="interests" placeholder="Enter your interests" required>
+                <div class="col-12">
+                    <textarea class="form-control" name="interests" placeholder="Enter your interests" required rows="4"></textarea>
                 </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Find Job Roles</button>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Find Job Roles</button>
                 </div>
             </form>
         </div>
@@ -107,7 +121,7 @@
                         row.append($('<td>').text(response.JD[i]));
                         row.append($('<td>').text(response.courses[i]));
                         row.append($('<td>').text(response.colleges[i]));
-                        row.append($('<td>').text(response.salary[i]));
+                        row.append($('<td>').addClass('salary-column').text(response.salary[i]));
                         table.append(row);
                     }
                     button.html(originalText);
