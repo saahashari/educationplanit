@@ -31,10 +31,10 @@
                     var table = $('<table>').addClass('job-table');
                     var headerRow = $('<tr>');
                     headerRow.append($('<th>').text('Job Role'));
-                    headerRow.append($('<th>').text('JD'));
-                    headerRow.append($('<th>').text('Courses'));
-                    headerRow.append($('<th>').text('Colleges'));
-                    headerRow.append($('<th>').text('Salary'));
+                    headerRow.append($('<th>').text('Job Description'));
+                    headerRow.append($('<th>').text('Courses Recommended'));
+                    headerRow.append($('<th>').text('Colleges (Rank 1-3)'));
+                    headerRow.append($('<th>').text('Salary Range'));
                     table.append(headerRow);
 
                     for (var i = 0; i < response.jobroles.length; i++) {

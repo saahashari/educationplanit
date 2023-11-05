@@ -46,6 +46,28 @@ def findcolleges(jobroles):
   colleges = []
   for i in jobroles:
     prompt = f'Output format should be College|Degree. Do not add any title like College|Degree. No numbered list too. Can you give me the top 3 schools for the {i} role? Also, give me which undergrad degree program to go for? Just list these out as a starred list only.'
+    completion = palm.generate_text(
+    model=model_id,
+    prompt=prompt,
+    temperature=0.99,
+    max_output_tokens=800,
+    )
+    result = completion.result
+    # Split the result into lines and strip whitespace
+    lines = [line.strip() for line in result.split('\n') if line.strip()]
+    # Create a new list to hold the formatted colleges and degrees
+    formatted_colleges = []
+    for line in lines:
+      # Assuming the format is 'College - Degree', we replace ' - ' with '|'
+      formatted_line = line.replace(' - ', '|')
+      formatted_colleges.append(formatted_line)
+    # Join the formatted colleges with commas
+    colleges_string = ', '.join(formatted_colleges)
+    colleges.append(colleges_string)
+  return colleges
+  """colleges = []
+  for i in jobroles:
+    prompt = f'Output format should be College|Degree. Do not add any title like College|Degree. No numbered list too. Can you give me the top 3 schools for the {i} role? Also, give me which undergrad degree program to go for? Just list these out as a starred list only.'
     completion=palm.generate_text(
     model=model_id,
     prompt=prompt,
@@ -60,7 +82,7 @@ def findcolleges(jobroles):
     result_mod = result_mod.replace('College | Degree', '') #resorted to this hard-coding after trying numerous times to clean strings efficiently
     colleges.append(result_mod)
   colleges = [x.strip(' ') for x in colleges]
-  return colleges
+  return colleges"""
 
 def findsalaryrange(jobroles):
   salaryranges = []
@@ -115,7 +137,7 @@ def index():
 
 @app.route('/findjobroles', methods=['POST'])
 def get_job_roles():
-    interests = request.form['interests']
+    interests = request.form['interests'] + 'Exclude any headers like top 5 job roles and explanations.'
     job_roles_data = findjobroles(interests)
     
     # Generate list of lists for the table
