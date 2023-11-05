@@ -1,6 +1,6 @@
 
 
-<h2 style="text-align: center;"> <u>Project Title - Education Planet: "Discover Your Future Today"</u></h2> <br>
+<h2 style="text-align: center;"> <u>Project Title - Education PlanIt: "Discover Your Future Today"</u></h2> <br>
 
 <h3 style= "text-align: left;"><i><u>Project Background</u></i></h3> <br>
 Automated Educational Consulting is an innovative career exploration tool tailored to students who aren’t sure on what to do in the future. Through inputting sentences or phrases upon your strengths, habits, and interests, x helps students identify potential careers. By making career exploration fun and relevant, we help young students make their correct choices from now on to be successful in their future careers.
