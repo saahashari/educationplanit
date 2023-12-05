@@ -83,6 +83,21 @@ def findsalaryrange(jobroles):
   salaryranges = [x.strip(' ') for x in salaryranges]
   return salaryranges
 
+def findonlineresources(jobroles):
+  resources = []
+  for i in jobroles:
+    prompt = f"Can you share a list of free resources I can use to be {i}? Just list out the top 5 resources with links if possible and without any description or anything else. The output format should be a starred list with no titles."
+    completion=palm.generate_text(
+      model=model_id,
+      prompt=prompt,
+      temperature=0.99,
+      max_output_tokens=800,
+    )
+    result = completion.result
+    result = result.replace('*', '')
+    resources.append(result)
+  return resources
+
 def findjobroles(interests):
   prompt = interests + ''' Output format should be a starred list. Find me the perfect job role. Just list the top 5 job roles alone, and nothing else.'''
   completion=palm.generate_text(
@@ -101,6 +116,7 @@ def findjobroles(interests):
         "courses": findcourses(jobroles),
         "colleges": findcolleges(jobroles),
         "salary": findsalaryrange(jobroles),
+        "onlineRes": findonlineresources(jobroles)
     }
 
 def clean_text(text):
