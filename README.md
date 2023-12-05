@@ -134,26 +134,69 @@ Here, the function recieves the dynamic input from the user. The prompt is the p
 <br>The code for our user interface (UI) has been provided, which contains a Bootstrap CSS framework. Let's break everything down step-by-step. To begin with, we declare the document as an 'HTML' document in the English language. In the Head Section, we use the <i>title</i>, <i>link</i>, and <i>script</i> tags to establish the contents of the UI, such as the title, as well as a reference the included Bootstrap Stylesheet. Also, we use the <i>intergrity</i> and <i>crossorigin</i> tags to ensure the authenticity of the file. In the Body Section, we first use <i>container text-center</i> as a container for our generated content and <i>row text-center</i> to display a heading. Next, we create a form called 'interest-form' that contains an input field for the user to detail their personal and professional interets. This is followed by a submit button coded as <i>button type="submit"</i> with a Bootstrap button of class <i>class="btn btn-primary</i> and the generated response is stored in an empty container <i>div id="response"</i>. We follow this up with a jQuery, which is JavaScript Library, that handles a AJAX Request to generate a table of specifc Job Roles based on the user's response. When handling an AJAX Request in this case, we bind our specific function to a document ready request, <i>$(document).ready(function())</i>, to ensure our DOM is loaded before executing or running. This is followed up by a Form Submission Handler that triggers the ID <i>interest-form</i> upon successful user input submission. Our code then handles an AJAX Request that specifies an endpoint, <i>/findjobroles</i>, for the request to be sent as well as data from the request to be sent to the server and serialized for submission. The <i>success: function(response)</i> is an AJAX Success Callback that defines what happens if the AJAX Request is successfull receieved and executed; it will generate an HTML Table that contains associated values in the Header Rows of <i>Job Role</i>, <i>JD</i>, <i>Courses</i>, <i>Colleges</i>, and <i>Salary</i>, which are all appended to the table. This is then followed by the for loop function <i>for(var i = 0; i < response.jobroles.length; i++)</i>, which essentially works to generate and append text values in each of the specific header rows to the constructed table. This table is then added to the HTML Element with ID <i>#response</i>; it should be noted that the previous responses of the table are emptied before adding the newly generated responses or result. Finally, in the event that an AJAX Request cannot be handled or encounters an error, we created an error callback function that logs the message, "Error Occurred" and displays an error message through the HTML Element with ID <i>#response</i>.<br>
 This index template is referenced in the main. 
 <br>
-<div style="border: 2px solid#000; padding 10px"><code>@app.route('/')
-<br>def index():
-<br>def index():
-<br>@app.route('/findjobroles', methods=['POST'])
-<br>def get_job_roles():
-<br>interests = request.form['interests']
-<br> job_roles_data = findjobroles(interests)
-<br>output = ""
-<br>for key, values in job_roles_data.items():
-<br>output += key + "; "
-<br>for value in values:
-<br>output += value + " "
-<br>output += " "
-<br>return output
-<br>if __name__ == '__main__':
-<br>app.run(debug=True)</code></div>
-<br> The index is referenced and called here. The request form recieves the dynamic input from the user and the <i>job_roles_data </i> is called by passing the input as the parameter. The output is recieved by iterating over the items in <i> job_roles_data </i>. The main code is used to run a standard python flask application. The <i>debug=true</i> enables the flask debugger.
+<div style="border: 2px solid #000; padding: 10px">
+<pre>
+@app.route('/')
+def index():
+    return 'Hello World!'
+</pre>
+<pre>
+@app.route('/findjobroles', methods=['POST'])
+def get_job_roles():
+    interests = request.form['interests']
+    job_roles_data = findjobroles(interests)
+    output = ""
+    for key, values in job_roles_data.items():
+        output += key + "; "
+        for value in values:
+            output += value + " "
+        output += " "
+    return output
+</pre>
+<pre>
+if __name__ == '__main__':
+    app.run(debug=True)
+</pre>
+
+</div>
+
+
+<br>
+<br>
+<h5><u>SNIPPET 9(Online Web Resource)</h5></u>
+<br>This provided snippet acts as a web scraper and draws information on the available online courses that would furnish the individual for his career. These resources can be used by the individual as a foundation for the career.
+<div style="border: 2px solid #000; padding: 10px">
+    <pre>
+def findonlineresources(jobroles):
+    resources = []
+    for i in jobroles:
+        prompt = f"Can you share a list of free resources I can use to be {i}? Just list out the top 5 resources with links if possible and without any description or anything else. The output format should be a starred list with no titles."
+        completion = palm.generate_text(model=model_id, prompt=prompt, max_output_tokens=800)
+        result = completion.result
+        result = result.replace('*', '')
+        resources.append(result)
+    return resources
+    </pre>
+</div>
 
 <h3 style="text-align: left;"><i><u>Results and Output</u></i></h3><br>
-The output has been presented in the images provided in the section. As per the interests of the user, the interface provides the course of action that the user can stick to in order to achieve it. From a future point of view, this can be further worked on by training with more availablity of the data. To install the required packages & libraries that we used for our project, you can write the command <b><code>pip install -r requirements.txt</code></b> . <br>
+The output has been presented in the images provided in the section. As per the interests of the user, the interface provides the course of action that the user can stick to in order to achieve it. From a future point of view, this can be further worked on by training with more availablity of the data. The product has been made public using the AWS, and the provided link <b><i><u>http://3.144.159.94:8000/</u></i></b> can be used to access it.  
+<br>
+<h5><b><u>Comparing Results from Similar Platforms</u></b></h5>
+<br>Education PlanIt has been trained as a career guidance tool and we have compared the exact same prompts in similar platforms. This particular prompt has been used  in Google Bard, ChatGPT and Education PlanIt, as a test to compare our LLM responses to that of the others. <br><b>"I like art, design and drawing. I also like history and jeopardy. What are my career options and which colleges should I opt for to achieve it? Also what would be my average annual return on these career options?"</b>.<br> The results are compared below.<br>
+
+<h5>Bard Result</h5>
+<img src="images/bardResult.jpeg" alt="Bard Result">
+
+<h5>GPT Result</h5>
+<img src="images/gptResult.png" alt="GPT Result">
+
+<h5>Education PlanIt Platform Result</h5>
+<img src="images/platformResult.png" alt="Platform Result">
+
+
+<h3 style="text-align: left;"><i><u>Results and Output</u></i></h3><br>
+The output has been presented in the images provided in the section. As per the interests of the user, the interface provides the course of action that the user can stick to in order to achieve it. From a future point of view, this can be further worked on by training with more availability of the data. To install the required packages & libraries that we used for our project, you can write the command <b><code>pip install -r requirements.txt</code></b> . <br>
 To run the code use <b><code>python hackathoneducation.py</code></b>
 
 
