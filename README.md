@@ -1,5 +1,4 @@
 
-
 <h2 style="text-align: center;"> <u>Project Title - Education PlanIt: "Discover Your Future Today"</u></h2> <br>
 
 <h3 style= "text-align: left;"><i><u>Project Background</u></i></h3> <br>
